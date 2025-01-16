@@ -1,0 +1,9 @@
+[package]
+name = "countdown"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+freya = "0.2.2"
+time = { version = "0.3.37", features = ["formatting", "parsing", "local-offset"] }
+tokio = "1.42.0"
