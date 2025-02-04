@@ -22,7 +22,7 @@ fn app() -> Element {
     let read_date = *current_date.read();
     let formatted_date = read_date.format(&date_format).unwrap();
     let mut date_input = use_signal(|| formatted_date.clone());
-    let mut is_inputing = use_signal(|| false);
+    let mut is_inputting = use_signal(|| false);
     let mut future_date = use_signal(|| read_date);
     rsx!(
         rect {
@@ -39,7 +39,7 @@ fn app() -> Element {
                     main_align: "center",
                     cross_align: "center",
                     direction: "horizontal",
-                    if *is_inputing.read() {
+                    if *is_inputting.read() {
                         Input {
                             theme: theme_with!(InputTheme {
                                 width: "191".into(),
@@ -55,7 +55,7 @@ fn app() -> Element {
                                     .set(PrimitiveDateTime::parse(&date_input.read(), &date_format)
                                     .expect("Failed to read input")
                                     .assume_offset(read_date.offset()));
-                                is_inputing.set(false)
+                                is_inputting.set(false)
                             }
                         }
                     } else {
@@ -65,7 +65,7 @@ fn app() -> Element {
                         }
                         Button {
                             label { "Edit" },
-                            onclick: move |_| is_inputing.set(true)
+                            onclick: move |_| is_inputting.set(true)
                         }
                     }
                 }
